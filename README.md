@@ -1,3 +1,18 @@
+My changes:
+added 
+/Unity/LinuxVoiceUnity.cs
+/Voice/UniversalSpeech.cs
+
+and a small edit to main, to set linux to default.
+
+this will write the text to a file located at c:/tmp/speech_mod_queue.txt
+it will rewrite the file each time you call a new text from the game
+use your prefered tts engine to read the file and speak it,
+i also included a small script that does that with supertonic tts
+find it at the front page of this project
+
+
+
 # SpeechMod
 By [Osmodium](https://github.com/Osmodium)
 
