@@ -10,7 +10,7 @@ namespace SpeechMod.Patches;
 [HarmonyPatch]
 public static class CharInfoCompanionStoryFullView_Patch
 {
-    [HarmonyPatch(typeof(CharInfoCompanionStoryFullView), nameof(CharInfoCompanionStoryFullView.BindViewImplementation))]
+    [HarmonyPatch(typeof(CharInfoCompanionStoryFullView), "BindViewImplementation")]
     [HarmonyPostfix]
     public static void BindViewImplementation_Postfix(CharInfoCompanionStoryFullView __instance)
     {

@@ -18,7 +18,7 @@ public static class DialogAnswerView_Patch
 {
     private const string DIALOG_ANSWER_ARROW_TEXTURE_PATH = "Arrow";
 
-    [HarmonyPatch(typeof(DialogAnswerView), nameof(DialogAnswerView.BindViewImplementation))]
+    [HarmonyPatch(typeof(DialogAnswerView), "BindViewImplementation")]
     [HarmonyPostfix]
     public static void BindViewImplementation_Postfix(DialogAnswerView __instance)
     {

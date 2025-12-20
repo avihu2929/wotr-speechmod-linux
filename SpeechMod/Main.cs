@@ -135,19 +135,24 @@ public static class Main
 
     private static bool SetSpeech()
     {
-        switch (Application.platform)
+        // --- HARDCODED FOR LINUX/EXTERNAL TTS ---
+        // This removes all platform checks and Windows dependencies.
+        
+        Logger?.Log($"Forcing SpeechMod to initialize for Linux/External TTS (spd-say).");
+        
+        // 1. Assign the new, safe ISpeech wrapper.
+        // This ensures the Main.Speech variable is never null.
+        Speech = new UniversalSpeech(); 
+        
+        // 2. Load the Linux-compatible Unity component.
+        // This component contains the working 'spd-say' logic.
+        SpeechExtensions.AddUiElements<LinuxVoiceUnity>("LinuxVoice");
+        
+        if (Speech == null)
         {
-            case RuntimePlatform.OSXPlayer:
-                Speech = new AppleSpeech();
-                SpeechExtensions.AddUiElements<AppleVoiceUnity>(Constants.APPLE_VOICE_NAME);
-                break;
-            case RuntimePlatform.WindowsPlayer:
-                Speech = new WindowsSpeech();
-                SpeechExtensions.AddUiElements<WindowsVoiceUnity>(Constants.WINDOWS_VOICE_NAME);
-                break;
-            default:
-                Logger.Critical($"SpeechMod is not supported on {Application.platform}!");
-                return false;
+            // This check should now always succeed!
+            Logger?.Critical($"Pathfinder Kingmaker SpeechMod failed to initialize the ISpeech wrapper!");
+            return false;
         }
 
         return true;
