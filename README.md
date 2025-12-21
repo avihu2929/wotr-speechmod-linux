@@ -11,6 +11,7 @@ use your prefered tts engine to read the file and speak it,
 i also included a small script that does that with supertonic tts
 find it at the front page of this project
 
+i used google gemini for most of the code
 
 
 # SpeechMod
