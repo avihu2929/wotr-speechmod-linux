@@ -55,6 +55,15 @@ public static class MenuGUI
             Main.Settings.InterruptPlaybackOnPlay = GUILayout.Toggle(Main.Settings.InterruptPlaybackOnPlay, Main.Settings.InterruptPlaybackOnPlay ? "Interrupt and play" : "Add to queue");
             GUILayout.EndHorizontal();
         }
+        else
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("External TTS: silence gate seconds (0 = never block barks)", GUILayout.ExpandWidth(false));
+            GUILayout.Space(10);
+            Main.Settings.ExternalTtsSilenceGateSeconds = GUILayout.HorizontalSlider(Main.Settings.ExternalTtsSilenceGateSeconds, 0f, 5f, GUILayout.Width(300f));
+            GUILayout.Label($" {Main.Settings.ExternalTtsSilenceGateSeconds:0.00}s", GUILayout.ExpandWidth(false));
+            GUILayout.EndHorizontal();
+        }
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Auto play dialog", GUILayout.ExpandWidth(false));
