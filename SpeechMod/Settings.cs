@@ -46,6 +46,12 @@ public class Settings : UnityModManager.ModSettings
     public bool PlaybackBarks = true;
     public bool PlaybackBarkOnlyIfSilence = true;
 
+    // For external TTS implementations (like Linux queue-file mode) there is no reliable way to know
+    // when audio playback has ended. This value controls how long the mod should *pretend* it is speaking
+    // after writing a line, which affects "Only playback barks if there's silence".
+    // 0 = never block (recommended for queue-file workflows).
+    public float ExternalTtsSilenceGateSeconds = 0f;
+
     public bool ShowNotificationOnPlaybackStop = true;
 
     public bool ShowPlaybackOfDialogAnswers = true;

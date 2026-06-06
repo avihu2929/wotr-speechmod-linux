@@ -110,10 +110,18 @@ public class LinuxVoiceUnity : MonoBehaviour
 
 
             Main.Logger.Log($"Wrote speech queue to: {QUEUE_FILE_PATH}");
-            // Set a simple timeout to reset the speaking flag.
-            // Assuming 10 chars per second plus a 1.0s buffer.
-            float duration = text.Length * 0.1f + 1.0f; 
-            m_TheVoice.ExecuteLater(duration, () => IsSpeaking = false);
+            // Reset the speaking flag.
+            // If ExternalTtsSilenceGateSeconds is 0 (default), we immediately allow subsequent barks
+            // so we don't drop lines just because an external TTS may still be speaking.
+            var gateSeconds = Main.Settings?.ExternalTtsSilenceGateSeconds ?? 0f;
+            if (gateSeconds <= 0f)
+            {
+                IsSpeaking = false;
+            }
+            else
+            {
+                m_TheVoice.ExecuteLater(gateSeconds, () => IsSpeaking = false);
+            }
         }
         catch (Exception ex)
         {
